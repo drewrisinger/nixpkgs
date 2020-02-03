@@ -22,8 +22,10 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv.lib; {
     description = "A streaming protocol for test results";
-    homepage = https://launchpad.net/subunit;
+    homepage = "https://launchpad.net/subunit";
+    downloadPage = "https://github.com/testing-cabal/subunit";
     license = licenses.asl20;
     platforms = platforms.all;
+    maintainers = with maintainers; [ drewrisinger ];
   };
 }
