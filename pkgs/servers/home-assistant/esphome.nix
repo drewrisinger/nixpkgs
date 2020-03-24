@@ -1,4 +1,11 @@
-{ lib, python3, platformio, esptool, git, protobuf3_10, fetchpatch }:
+{ lib
+, esptool
+, git
+, fetchpatch
+, python3
+, platformio
+, protobuf3_10
+}:
 
 let
   python = python3.override {
@@ -28,15 +35,22 @@ in python.pkgs.buildPythonApplication rec {
   ESPHOME_USE_SUBPROCESS = "";
 
   propagatedBuildInputs = with python.pkgs; [
-    voluptuous pyyaml paho-mqtt colorlog
-    tornado protobuf tzlocal pyserial ifaddr
+    colorlog
+    ifaddr
+    paho-mqtt
     protobuf
+    pyserial
+    pyyaml
+    tornado
+    tzlocal
+    voluptuous
   ];
 
   postPatch = ''
     substituteInPlace setup.py \
       --replace "protobuf==3.10.0" "protobuf~=3.10" \
       --replace "paho-mqtt==1.4.0" "paho-mqtt~=1.4" \
+      --replace "colorlog==4.0.2" "colorlog" \
       --replace "tornado==5.1.1" "tornado~=5.1"
   '';
 
@@ -53,7 +67,7 @@ in python.pkgs.buildPythonApplication rec {
 
   meta = with lib; {
     description = "Make creating custom firmwares for ESP32/ESP8266 super easy";
-    homepage = https://esphome.io/;
+    homepage = "https://esphome.io/";
     license = licenses.mit;
     maintainers = with maintainers; [ dotlambda globin ];
   };
