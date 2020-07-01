@@ -1,4 +1,4 @@
-{ lib, python3, fetchFromGitHub, git, pkgconfig }:
+{ lib, python3, fetchFromGitHub, git, pkgconfig, cmake }:
 
 # Note:
 # Conan has specific dependency demands; check
@@ -72,6 +72,7 @@ in newPython.pkgs.buildPythonApplication rec {
   ];
 
   checkInputs = [
+    cmake
     pkgconfig
     git
   ] ++ (with newPython.pkgs; [
@@ -81,16 +82,24 @@ in newPython.pkgs.buildPythonApplication rec {
     parameterized
     webtest
   ]);
+  dontUseCmakeConfigure = true;
 
   # TODO: reenable tests now that we fetch tests w/ the source from GitHub.
   # Not enabled right now due to time constraints/failing tests that I didn't have time to track down
-  doCheck = false;
+  doCheck = true;
 
   postPatch = ''
     substituteInPlace conans/requirements.txt \
       --replace "PyYAML>=3.11, <3.14.0" "PyYAML" \
       --replace "deprecation>=2.0, <2.1" "deprecation" \
       --replace "six>=1.10.0,<=1.14.0" "six"
+  '';
+
+  # pytestFlagsArray = [
+  #   "-rfE"
+  # ];
+  checkPhase = ''
+    nosetests -A "not slow and not svn" -e "ftp
   '';
 
   meta = with lib; {
