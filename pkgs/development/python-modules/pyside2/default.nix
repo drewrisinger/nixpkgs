@@ -3,11 +3,11 @@
 
 stdenv.mkDerivation rec {
   pname = "pyside2";
-  version = "5.15.0";
+  version = "5.15.1";
 
   src = fetchurl {
     url = "https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-${version}-src/pyside-setup-opensource-src-${version}.tar.xz";
-    sha256 = "0s3bgddcsf6w297nyxv08xpc2nnr3sli980p24nf4xivvr9yxkgi";
+    sha256 = "1yn3f414ql8rrvwxlfpp2sckpmb89zj5iszgy1690mrjh7cc2xgi";
   };
 
   patches = [
@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv.lib; {
     description = "LGPL-licensed Python bindings for Qt";
-    license = licenses.lgpl21;
+    license = licenses.lgpl3Only;
     homepage = "https://wiki.qt.io/Qt_for_Python";
     maintainers = with maintainers; [ gebner ];
   };
