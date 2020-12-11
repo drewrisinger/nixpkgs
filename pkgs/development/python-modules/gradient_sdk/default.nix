@@ -21,5 +21,6 @@ buildPythonPackage rec {
     license     = licenses.mit;
     platforms   = platforms.unix;
     maintainers = with maintainers; [ freezeboy ];
+    broken = true;  # broken with hyperopt >= 0.2.0. Looks like fix is in: https://github.com/NixOS/nixpkgs/pull/103841
   };
 }
