@@ -25,6 +25,8 @@ buildPythonPackage rec {
     py.test -k "not test_cgiapp and not test_proxy"
   '';
 
+  pythonImportsCheck = [ "paste" ];
+
   meta = with stdenv.lib; {
     description = "Tools for using a Web Server Gateway Interface stack";
     homepage = "http://pythonpaste.org/";
