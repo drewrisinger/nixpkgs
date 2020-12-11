@@ -5,10 +5,10 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "salt-pepper";
-  version = "0.7.5";
+  version = "0.7.6";
   src = python3Packages.fetchPypi {
     inherit pname version;
-    sha256 = "1wh6yidwdk8jvjpr5g3azhqgsk24c5rlzmw6l86dmi0mpvmxm94w";
+    sha256 = "b75a641d4fd96663ae44fc7ce4aadb7e4c87b8ff30f7ac35479a282b99894749";
   };
 
   buildInputs = with python3Packages; [ setuptools_scm ];
