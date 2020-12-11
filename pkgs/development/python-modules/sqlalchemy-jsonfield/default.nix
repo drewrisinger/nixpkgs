@@ -29,5 +29,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/penguinolog/sqlalchemy_jsonfield";
     changelog = "https://github.com/penguinolog/sqlalchemy_jsonfield/blob/master/CHANGELOG.rst";
     license = licenses.asl20;
+    maintainers = with maintainers; [ ];
   };
 }
