@@ -22,6 +22,8 @@ buildPythonPackage rec {
     sha256 = "ef72be284e7f2b61ac0894b44165926f13f5d995b2bf3cd8a8dedc6224b255a7";
   };
 
+  postPatch = "substituteInPlace setup.py --replace 'pytest-pep8>=1.0.6' ''";
+
   propagatedBuildInputs = [ python-utils ];
   nativeBuildInputs = [ pytestrunner ];
   checkInputs = [
