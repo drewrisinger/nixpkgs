@@ -5,8 +5,6 @@
 # Test inputs
 , pytestCheckHook
 , hypothesis
-# TEMP:
-, pytest-timeout
 }:
 
 buildPythonPackage rec {
@@ -22,12 +20,26 @@ buildPythonPackage rec {
 
   propagatedBuildInputs = [ attrs ];
 
-  checkInputs = [ pytestCheckHook hypothesis pytest-timeout ];
+  checkInputs = [ pytestCheckHook hypothesis ];
   pytestFlagsArray = [
-    "-vv"
-    "--timeout=10"
-    "-x"
-    "--durations=20"
+    "-v"
+    "--durations=10"
+  ];
+  pythonImportsCheck = [ "cattr" ];
+  disabledTests = [
+    # Disable slowest tests to get build to < 5 mins
+    "test_nested_roundtrip"
+    "test_disambiguation"
+    "test_union_field_roundtrip"
+    "test_attrs_astuple_unstructure"
+    "test_attrs_asdict_unstructure"
+    "test_structure_union"
+    "test_unmodified_generated_structuring"
+    "test_nested_roundtrip"
+    "test_omit_default_roundtrip"
+    "test_structure_union_none"
+    "test_type_overrides"
+    "test_structure_union_explicit"
   ];
 
   meta = with lib; {
@@ -35,5 +47,6 @@ buildPythonPackage rec {
     homepage = "https://cattrs.readthedocs.io/en/latest/";
     changelog = "https://cattrs.readthedocs.io/en/latest/history.html";
     license = licenses.mit;
+    maintainers = with maintainers; [ ];
   };
 }
